@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd "$( dirname "$0" )"
+
+if [ -z "$1" ]; then
+	java -jar ./DownloadAndExtract2.jar
+	find . -type f -exec chmod -v a+x '{}' ';'
+else
+	java -jar ./DownloadAndExtract2.jar
+	find . -type f -exec chmod -v a+x '{}' ';'
+	./gradlew setupDecompWorkspace "$1"
+fi

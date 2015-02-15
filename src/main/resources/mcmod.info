@@ -1,0 +1,16 @@
+[
+{
+  "modid": "connectedtextures",
+  "name": "Connected Textures",
+  "description": "Example placeholder mod. Or something like that.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Kneelawk"],
+  "credits": "Kneelawk, for making this test mod.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
