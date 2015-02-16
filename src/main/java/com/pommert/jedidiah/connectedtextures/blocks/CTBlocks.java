@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.pommert.jedidiah.connectedtextures.ref.RefMod;
+import com.pommert.jedidiah.connectedtextures.ref.RefName;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -13,18 +14,27 @@ public class CTBlocks {
 	public static Block blockConnectedTextureGlass;
 	public static Block blockConnectedTextureBrick;
 	public static Block blockGlowingTile;
+	public static Block blockDiscoFloor;
 
 	public static void init() {
 		blockConnectedTextureGlass = initBlock(
 				new BlockConnectedTextureGlass(Material.glass),
-				"blockConnectedTextureGlass", CreativeTabs.tabDecorations, true)
-				.setStepSound(Block.soundTypeGlass).setLightOpacity(0);
-		blockConnectedTextureBrick = initBlock(new BlockConnectedTextureBrick(
-				Material.rock), "blockConnectedTextureBrick",
-				CreativeTabs.tabBlock, true);
-		blockGlowingTile = initBlock(new BlockGlowingTile(Material.glass),
-				"blockGlowingTile", CreativeTabs.tabDecorations, true)
-				.setLightLevel(0.7F);
+				RefName.Blocks.BLOCK_CONNECTED_TEXTURE_GLASS,
+				CreativeTabs.tabDecorations, true)
+				.setStepSound(Block.soundTypeGlass).setLightOpacity(0)
+				.setHardness(1F);
+		blockConnectedTextureBrick = initBlock(
+				new BlockConnectedTextureBrick(Material.rock),
+				RefName.Blocks.BLOCK_CONNECTED_TEXTURE_BRICK,
+				CreativeTabs.tabBlock, true).setHardness(1F);
+		blockGlowingTile = initBlock(new BlockGlowingTile(Material.wood),
+				RefName.Blocks.BLOCK_GLOWING_TILE, CreativeTabs.tabDecorations,
+				true).setStepSound(Block.soundTypeGlass).setLightLevel(0.8F)
+				.setHardness(1F);
+		blockDiscoFloor = initBlock(new BlockDiscoFloor(Material.glass),
+				RefName.Blocks.BLOCK_DISCO_FLOOR, CreativeTabs.tabDecorations,
+				true).setStepSound(Block.soundTypeGlass).setLightLevel(0.7F)
+				.setHardness(1F);
 	}
 
 	public static Block initBlock(Block block, String name, CreativeTabs tab,

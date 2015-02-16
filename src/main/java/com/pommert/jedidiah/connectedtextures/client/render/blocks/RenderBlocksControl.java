@@ -17,6 +17,8 @@ public class RenderBlocksControl {
 				new ConnectedTexturesRenderBlocks());
 		registerBlockRenderer("GlowingTextures",
 				new GlowingTexturesRenderBlocks());
+		registerBlockRenderer("ConnectedGlowingTextures",
+				new ConnectedGlowingTexturesRenderBlocks());
 	}
 
 	public static void registerBlockRenderer(String renderName,
