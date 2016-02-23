@@ -37,7 +37,7 @@ public class CTBlocks {
 				true).setStepSound(Block.soundTypeGlass).setLightLevel(0.7F)
 				.setHardness(1F);
 		blockFancyLight = initBlock(
-				new BlockWithTileEntity(
+				new BlockFancyLight(
 						RefName.TileEntities.TILE_ENTITY_FANCY_LIGHT, -1,
 						Material.glass), RefName.Blocks.BLOCK_FANCY_LIGHT,
 				CreativeTabs.tabDecorations, true).setLightLevel(0.7f);
