@@ -2,6 +2,7 @@ package com.pommert.jedidiah.connectedtextures.proxy;
 
 import com.pommert.jedidiah.connectedtextures.ConnectedTextures;
 import com.pommert.jedidiah.connectedtextures.blocks.CTBlocks;
+import com.pommert.jedidiah.connectedtextures.log.CTLog;
 import com.pommert.jedidiah.connectedtextures.tileentity.CTTileEntities;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -17,6 +18,7 @@ public class ProxyCommon {
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
+		CTLog.init(event.getModLog());
 		CTBlocks.init();
 		CTTileEntities.init();
 	}

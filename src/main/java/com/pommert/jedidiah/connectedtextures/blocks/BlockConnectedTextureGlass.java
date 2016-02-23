@@ -8,7 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.pommert.jedidiah.connectedtextures.client.render.IconMulti;
+import com.pommert.jedidiah.connectedtextures.client.render.IconSplit;
 import com.pommert.jedidiah.connectedtextures.proxy.ProxyCommon;
 import com.pommert.jedidiah.connectedtextures.ref.RefMod;
 import com.pommert.jedidiah.connectedtextures.ref.RefTextures;

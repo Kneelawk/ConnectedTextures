@@ -1,13 +1,11 @@
 package com.pommert.jedidiah.connectedtextures.client.render.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
-import codechicken.lib.vec.Vector3;
 
-import com.pommert.jedidiah.connectedtextures.client.render.IconMulti;
+import com.pommert.jedidiah.connectedtextures.client.render.IIconArray;
+import com.pommert.jedidiah.connectedtextures.client.render.IconSplit;
 import com.pommert.jedidiah.connectedtextures.util.BitUtils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -22,9 +20,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -33,27 +31,27 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.NORTH, ForgeDirection.WEST,
 					ForgeDirection.DOWN, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.DOWN, new double[] { 0.5D,
 					0D, 0.5D, 8D, 8D }, new double[] { 0.5D, 0D, 0D, 8D, 0D },
 					new double[] { 1D, 0D, 0D, 16D, 0D }, new double[] { 1D,
 							0D, 0.5D, 16D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.DOWN, new double[] { 0D,
 					0D, 0.5D, 0D, 8D }, new double[] { 0D, 0D, 0D, 0D, 0D },
 					new double[] { 0.5D, 0D, 0D, 8D, 0D }, new double[] { 0.5D,
 							0D, 0.5D, 8D, 8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.DOWN, new double[] { 0.5D,
 					0D, 1D, 8D, 16D }, new double[] { 0.5D, 0D, 0.5D, 8D, 8D },
 					new double[] { 1D, 0D, 0.5D, 16D, 8D }, new double[] { 1D,
 							0D, 1D, 16D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.DOWN, new double[] { 0D,
 					0D, 1D, 0D, 16D }, new double[] { 0D, 0D, 0.5D, 0D, 8D },
 					new double[] { 0.5D, 0D, 0.5D, 8D, 8D }, new double[] {
 							0.5D, 0D, 1D, 8D, 16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceYNeg(block, x, y, z, texture);
 	}
@@ -64,9 +62,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -75,27 +73,27 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.NORTH, ForgeDirection.WEST,
 					ForgeDirection.UP, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.UP, new double[] { 1D, 1D,
 					0.5D, 16D, 8D }, new double[] { 1D, 1D, 0D, 16D, 0D },
 					new double[] { 0.5D, 1D, 0D, 8D, 0D }, new double[] { 0.5D,
 							1D, 0.5D, 8D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.UP, new double[] { 0.5D,
 					1D, 0.5D, 8D, 8D }, new double[] { 0.5D, 1D, 0D, 8D, 0D },
 					new double[] { 0D, 1D, 0D, 0D, 0D }, new double[] { 0D, 1D,
 							0.5D, 0D, 8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.UP, new double[] { 1D, 1D,
 					1D, 16D, 16D }, new double[] { 1D, 1D, 0.5D, 16D, 8D },
 					new double[] { 0.5D, 1D, 0.5D, 8D, 8D }, new double[] {
 							0.5D, 1D, 1D, 8D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.UP, new double[] { 0.5D,
 					1D, 1D, 8D, 16D }, new double[] { 0.5D, 1D, 0.5D, 8D, 8D },
 					new double[] { 0D, 1D, 0.5D, 0D, 8D }, new double[] { 0D,
 							1D, 1D, 0D, 16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceYPos(block, x, y, z, texture);
 	}
@@ -106,9 +104,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -117,27 +115,27 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.UP, ForgeDirection.EAST,
 					ForgeDirection.NORTH, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.NORTH, new double[] { 0D,
 					0.5D, 0D, 16D, 8D }, new double[] { 0D, 1D, 0D, 16D, 0D },
 					new double[] { 0.5D, 1D, 0D, 8D, 0D }, new double[] { 0.5D,
 							0.5D, 0D, 8D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.NORTH, new double[] { 0.5D,
 					0.5D, 0D, 8D, 8D }, new double[] { 0.5D, 1D, 0D, 8D, 0D },
 					new double[] { 1D, 1D, 0D, 0D, 0D }, new double[] { 1D,
 							0.5D, 0D, 0D, 8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.NORTH, new double[] { 0D,
 					0D, 0D, 16D, 16D }, new double[] { 0D, 0.5D, 0D, 16D, 8D },
 					new double[] { 0.5D, 0.5D, 0D, 8D, 8D }, new double[] {
 							0.5D, 0D, 0D, 8D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.NORTH, new double[] { 0.5D,
 					0D, 0D, 8D, 16D }, new double[] { 0.5D, 0.5D, 0D, 8D, 8D },
 					new double[] { 1D, 0.5D, 0D, 0D, 8D }, new double[] { 1D,
 							0D, 0D, 0D, 16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceZNeg(block, x, y, z, texture);
 	}
@@ -148,9 +146,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -159,27 +157,27 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.UP, ForgeDirection.WEST,
 					ForgeDirection.SOUTH, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.SOUTH, new double[] { 1D,
 					0.5D, 1D, 16D, 8D }, new double[] { 1D, 1D, 1D, 16D, 0D },
 					new double[] { 0.5D, 1D, 1D, 8D, 0D }, new double[] { 0.5D,
 							0.5D, 1D, 8D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.SOUTH, new double[] { 0.5D,
 					0.5D, 1D, 8D, 8D }, new double[] { 0.5D, 1D, 1D, 8D, 0D },
 					new double[] { 0D, 1D, 1D, 0D, 0D }, new double[] { 0D,
 							0.5D, 1D, 0D, 8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.SOUTH, new double[] { 1D,
 					0D, 1D, 16D, 16D }, new double[] { 1D, 0.5D, 1D, 16D, 8D },
 					new double[] { 0.5D, 0.5D, 1D, 8D, 8D }, new double[] {
 							0.5D, 0D, 1D, 8D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.SOUTH, new double[] { 0.5D,
 					0D, 1D, 8D, 16D }, new double[] { 0.5D, 0.5D, 1D, 8D, 8D },
 					new double[] { 0D, 0.5D, 1D, 0D, 8D }, new double[] { 0D,
 							0D, 1D, 0D, 16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceZPos(block, x, y, z, texture);
 	}
@@ -190,9 +188,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -201,29 +199,29 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.UP, ForgeDirection.NORTH,
 					ForgeDirection.WEST, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.WEST, new double[] { 0D,
 					0.5D, 1D, 16D, 8D }, new double[] { 0D, 1D, 1D, 16D, 0D },
 					new double[] { 0D, 1D, 0.5D, 8D, 0D }, new double[] { 0D,
 							0.5D, 0.5D, 8D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.WEST, new double[] { 0D,
 					0.5D, 0.5D, 8D, 8D },
 					new double[] { 0D, 1D, 0.5D, 8D, 0D }, new double[] { 0D,
 							1D, 0D, 0D, 0D }, new double[] { 0D, 0.5D, 0D, 0D,
 							8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.WEST, new double[] { 0D,
 					0D, 1D, 16D, 16D }, new double[] { 0D, 0.5D, 1D, 16D, 8D },
 					new double[] { 0D, 0.5D, 0.5D, 8D, 8D }, new double[] { 0D,
 							0D, 0.5D, 8D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.WEST, new double[] { 0D,
 					0D, 0.5D, 8D, 16D },
 					new double[] { 0D, 0.5D, 0.5D, 8D, 8D }, new double[] { 0D,
 							0.5D, 0D, 0D, 8D }, new double[] { 0D, 0D, 0D, 0D,
 							16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceXNeg(block, x, y, z, texture);
 	}
@@ -234,9 +232,9 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 		if (hasOverrideBlockTexture())
 			texture = overrideBlockTexture;
 
-		if (texture instanceof IconMulti) {
-			IconMulti tex = (IconMulti) texture;
-			if (tex.icons.length < 6)
+		if (texture instanceof IIconArray) {
+			IIconArray tex = (IIconArray) texture;
+			if (tex.getIconCount() < 6)
 				return;
 
 			boolean oc = true;
@@ -245,29 +243,29 @@ public class ConnectedTexturesRenderBlocks extends BaseRenderBlocks {
 						(int) x, (int) y, (int) z, currentMeta, 0);
 			int[] face = createFace(ForgeDirection.UP, ForgeDirection.SOUTH,
 					ForgeDirection.EAST, (int) x, (int) y, (int) z, oc);
-			tex.currentType = face[0] + 1;
+			tex.setCurrentIndex(face[0] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.EAST, new double[] { 1D,
 					0.5D, 0D, 16D, 8D }, new double[] { 1D, 1D, 0D, 16D, 0D },
 					new double[] { 1D, 1D, 0.5D, 8D, 0D }, new double[] { 1D,
 							0.5D, 0.5D, 8D, 8D });
-			tex.currentType = face[1] + 1;
+			tex.setCurrentIndex(face[1] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.EAST, new double[] { 1D,
 					0.5D, 0.5D, 8D, 8D },
 					new double[] { 1D, 1D, 0.5D, 8D, 0D }, new double[] { 1D,
 							1D, 1D, 0D, 0D }, new double[] { 1D, 0.5D, 1D, 0D,
 							8D });
-			tex.currentType = face[2] + 1;
+			tex.setCurrentIndex(face[2] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.EAST, new double[] { 1D,
 					0D, 0D, 16D, 16D }, new double[] { 1D, 0.5D, 0D, 16D, 8D },
 					new double[] { 1D, 0.5D, 0.5D, 8D, 8D }, new double[] { 1D,
 							0D, 0.5D, 8D, 16D });
-			tex.currentType = face[3] + 1;
+			tex.setCurrentIndex(face[3] + 1);
 			renderFace(tex, x, y, z, ForgeDirection.EAST, new double[] { 1D,
 					0D, 0.5D, 8D, 16D },
 					new double[] { 1D, 0.5D, 0.5D, 8D, 8D }, new double[] { 1D,
 							0.5D, 1D, 0D, 8D }, new double[] { 1D, 0D, 1D, 0D,
 							16D });
-			tex.currentType = 0;
+			tex.setCurrentIndex(0);
 		} else
 			super.renderFaceXPos(block, x, y, z, texture);
 	}

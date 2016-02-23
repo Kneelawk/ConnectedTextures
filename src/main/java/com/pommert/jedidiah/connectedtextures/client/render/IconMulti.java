@@ -1,126 +1,99 @@
 package com.pommert.jedidiah.connectedtextures.client.render;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
 
-@SideOnly(Side.CLIENT)
-public class IconMulti implements IIcon {
+public class IconMulti implements IIconArray {
 
-	@SideOnly(Side.CLIENT)
+	public int index;
 	public IIcon[] icons;
 
-	public int currentType;
-
-	public IconMulti(IIcon[] icons) {
+	public IconMulti(IIcon... icons) {
 		this.icons = icons;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public int getIconWidth() {
-		return icons[currentType].getIconWidth();
+		return icons[index].getIconWidth();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public int getIconHeight() {
-		return icons[currentType].getIconHeight();
+		return icons[index].getIconHeight();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public float getMinU() {
-		return icons[currentType].getMinU();
+		return icons[index].getMinU();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public float getMaxU() {
-		return icons[currentType].getMaxU();
+		return icons[index].getMaxU();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public float getInterpolatedU(double d) {
-		return getMinU() + (getMaxU() - getMinU()) * ((float) d / 16f);
+	public float getInterpolatedU(double off) {
+		return getMinU() + (getMaxU() - getMinU()) * ((float) off / 16f);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public float getMinV() {
-		return icons[currentType].getMinV();
+		return icons[index].getMinV();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public float getMaxV() {
-		return icons[currentType].getMaxV();
+		return icons[index].getMaxV();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public float getInterpolatedV(double d) {
-		return getMinV() + (getMaxV() - getMinV()) * ((float) d / 16f);
+	public float getInterpolatedV(double off) {
+		return getMinV() + (getMaxV() - getMinV()) * ((float) off / 16f);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getIconName() {
-		return icons[currentType].getIconName();
+		return icons[index].getIconName();
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int getIconWidth(int type) {
-		currentType = type;
-		return getIconWidth();
+	@Override
+	public void setCurrentIndex(int currentIndex) {
+		int i = 0;
+		for (; i < icons.length && currentIndex >= 0; i++) {
+			IIcon icon = icons[i];
+			if (icon instanceof IIconArray) {
+				IIconArray ia = (IIconArray) icon;
+				if (ia.getIconCount() > currentIndex) {
+					ia.setCurrentIndex(currentIndex);
+					currentIndex = -1;
+				} else {
+					currentIndex -= ia.getIconCount();
+				}
+			} else {
+				currentIndex--;
+			}
+		}
+		i -= 1;
+		if (i >= 0)
+			this.index = i;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int getIconHeight(int type) {
-		currentType = type;
-		return getIconHeight();
+	@Override
+	public int getCurrentIndex() {
+		return index;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public float getMinU(int type) {
-		currentType = type;
-		return getMinU();
+	@Override
+	public int getIconCount() {
+		int count = 0;
+		for (IIcon icon : icons) {
+			if (icon instanceof IIconArray) {
+				count += ((IIconArray) icon).getIconCount();
+			} else {
+				count++;
+			}
+		}
+		return count;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public float getMaxU(int type) {
-		currentType = type;
-		return getMaxU();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float getInterpolatedU(int type, double d) {
-		currentType = type;
-		return getInterpolatedU(d);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float getMinV(int type) {
-		currentType = type;
-		return getMinV();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float getMaxV(int type) {
-		currentType = type;
-		return getMaxV();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float getInterpolatedV(int type, double d) {
-		currentType = type;
-		return getInterpolatedV(d);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public String getIconName(int type) {
-		currentType = type;
-		return getIconName();
-	}
 }
